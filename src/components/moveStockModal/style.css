@@ -1,0 +1,40 @@
+.from-store-name {
+  margin-bottom: 0;
+}
+
+.move-stock-from {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.move-stock-from button {
+  margin: 0 2rem;
+}
+
+.move-stock-to-store {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.move-stock-to-store select {
+  margin-left: 1rem;
+  height: fit-content;
+  font-size: 1rem;
+}
+
+.move-stock-to-qty {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.move-stock-to-qty button {
+  margin: 0 2rem;
+}
+
+.move-stock-modal-button {
+  margin-bottom: 2rem;
+}

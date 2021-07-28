@@ -1,0 +1,8 @@
+.go-back {
+  margin: 1.5rem;
+  margin-bottom: 0;
+}
+
+.go-back:hover {
+  cursor: pointer;
+}

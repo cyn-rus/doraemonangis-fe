@@ -1,0 +1,13 @@
+.change-stock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.change-stock button {
+  margin: 0 2rem;
+}
+
+.change-stock-modal-button {
+  margin-bottom: 2rem;
+}

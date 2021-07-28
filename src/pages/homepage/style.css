@@ -1,0 +1,29 @@
+.home-page .title {
+  margin-left: 2.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.available {
+  margin-bottom: 0;
+}
+
+.add-store-dorayaki {
+  color: grey;
+  margin-left: 2rem;
+  margin-bottom: 0;
+}
+
+.add-store-dorayaki:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.black-line {
+  color: white;
+  margin: 0 2rem;
+  height: 0.5rem;
+  background-color: black;
+}
