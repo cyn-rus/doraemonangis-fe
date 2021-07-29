@@ -19,6 +19,26 @@
   margin-top: 2rem;
 }
 
+.own-dorayaki-header {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2rem;
+  align-items: center;
+}
+
+.own-dorayaki-header h3 {
+  color: grey;
+}
+
+.own-dorayaki-header h3:hover {
+  cursor: pointer;
+  color: black;
+}
+
+.own-dorayaki-header h3 {
+  margin-left: 2rem;
+}
+
 .stock-title {
   margin-left: 2rem;
   margin-bottom: 0.5rem;

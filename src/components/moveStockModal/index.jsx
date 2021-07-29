@@ -4,6 +4,7 @@ import { capitalize } from '../../helper'
 import './style.css'
 
 const MoveStockModal = ({own, qtyData}) => {
+  const [initQty, setInitQty] = useState(qtyData)
   const [fromQty, setFromQty] = useState(qtyData)
   const [toQty, setToQty] = useState(0)
   const [toStore, setToStore] = useState("")
@@ -14,6 +15,13 @@ const MoveStockModal = ({own, qtyData}) => {
   const [isQtySame, setQtySame] = useState(false)
   const [isSubmitted, setSubmitted] = useState(false)
   
+  useEffect(async () => {
+    await axios.get(`http://localhost:5000/own/get-qty/${own.name}/${own.taste}`)
+    .then(function (res) {
+      setInitQty(res.data)
+    })
+  }, [isSubmitted])
+
   const fetchStore = () => {
     axios.get(`http://localhost:5000/store`)
     .then(function (res) {
@@ -36,11 +44,13 @@ const MoveStockModal = ({own, qtyData}) => {
   }, [toStore])
 
   const addToQty = () => {
+    setSubmitted(false)
     if (fromQty > 0) {
       setToQty(toQty + 1)
       setFromQty(fromQty - 1)
       setFromErr(false)
       setToErr(false)
+      setQtySame(false)
     }
     else {
       setFromErr(true)
@@ -48,11 +58,13 @@ const MoveStockModal = ({own, qtyData}) => {
   }
 
   const reduceToQty = () => {
+    setSubmitted(false)
     if (toQty > 0) {
       setToQty(toQty - 1)
       setFromQty(fromQty + 1)
       setFromErr(false)
       setToErr(false)
+      setQtySame(false)
     }
     else {
       setToErr(true)
@@ -74,8 +86,9 @@ const MoveStockModal = ({own, qtyData}) => {
       qtyFrom: fromQty,
       qtyTo: toQty
     }
-    if (qtyData === fromQty) {
+    if (initQty === fromQty) {
       setQtySame(true)
+      setSubmitted(false)
     }
     else {
       const response = axios({
@@ -111,7 +124,7 @@ const MoveStockModal = ({own, qtyData}) => {
           <div className='black-line'>-</div>
           <div className='move-stock-to'>
             <div className='move-stock-to-store'>
-              <h1>Store: </h1>
+              <h1>To: </h1>
               <select
                 onChange={handleChange}
               >

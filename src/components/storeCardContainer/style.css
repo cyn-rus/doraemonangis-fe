@@ -1,5 +1,7 @@
 .store-card-container {
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  flex-wrap: wrap;
+  width: 98vw;
+  justify-content: center;
 }

@@ -1,0 +1,35 @@
+.add-store-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-store-modal h1 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.add-store-modal p {
+  margin-bottom: 0;
+}
+
+.add-store-modal form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-store-modal label {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.add-store-modal input {
+  margin-left: 2rem;
+  width: 50rem;
+  font-size: 1rem;
+}
+
+.add-store-modal .submit-button {
+  width: 7rem;
+  margin-left: 0;
+}

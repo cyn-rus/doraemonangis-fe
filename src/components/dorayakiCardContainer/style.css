@@ -1,5 +1,7 @@
 .dorayaki-card-container {
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 98vw;
 }

@@ -1,13 +1,21 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { capitalize } from '../../helper'
 import './style.css'
 
 const ChangeStockModal = ({own, qtyData}) => {
+  const [initQty, setInitQty] = useState(qtyData)
   const [qty, setQty] = useState(qtyData)
   const [err, setErr] = useState(false)
   const [isQtySame, setQtySame] = useState(false)
   const [isSubmitted, setSubmitted] = useState(false)
+
+  useEffect(async () => {
+    await axios.get(`http://localhost:5000/own/get-qty/${own.name}/${own.taste}`)
+    .then(function (res) {
+      setInitQty(res.data)
+    })
+  }, [isSubmitted])
 
   const reduceQty = () => {
     setQtySame(false)
@@ -35,11 +43,18 @@ const ChangeStockModal = ({own, qtyData}) => {
       taste: own.taste,
       qty: qty
     }
-    if (qtyData === qty) {
+    if (initQty === qty) {
       setQtySame(true)
+      setSubmitted(false)
     }
     else {
-      if (qtyData > qty) {
+      if (qty === 0) {
+        response = axios({
+          method: 'delete',
+          url: `http://localhost:5000/own/${data.name}/${data.taste}`
+        })
+      }
+      else if (qtyData > qty) {
         response = axios({
           method: 'post',
           url: 'http://localhost:5000/own/add',

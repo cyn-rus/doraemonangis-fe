@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Modal from 'react-modal'
 import AddStoreModal from '../../components/addStoreModal'
+import AddDorayakiModal from '../../components/addDorayakiModal'
 import DorayakiCardContainer from '../../components/dorayakiCardContainer'
 import StoreCardContainer from '../../components/storeCardContainer'
 import { BACKEND_URL } from '../../const'
@@ -10,25 +11,25 @@ import './style.css'
 const HomePage = () => {
   const [stores, setStores] = useState([])
   const [dorayakis, setDorayakis] = useState([])
-  const [loading, setLoading] = useState(true)
   const [isStoreModalOpen, setStoreModalOpen] = useState(false)
   const [isDorayakiModalOpen, setDorayakiModalOpen] = useState(false)
 
-  const fetchData = () => {
-    setLoading(false)
+  useEffect(() => {
     axios.get('http://localhost:5000/store')
       .then(function (res) {
         setStores(res.data)
     })
+  }, [isStoreModalOpen])
+
+  useEffect(() => {
     axios.get('http://localhost:5000/dorayaki')
       .then(function (res) {
         setDorayakis(res.data)
-      })
-  }  
+    })
+  }, [isDorayakiModalOpen])
 
   return (
     <div className='home-page'>
-      {loading && fetchData()}
       <div className='store'>
         <div className='title'>
           <h1 className='available'>Stores Available</h1>
@@ -45,7 +46,12 @@ const HomePage = () => {
       <div className='dorayaki'>
         <div className='title'>
           <h1 className='available'>Dorayaki Stock</h1>
-          <h3 className='add-store-dorayaki'>Add Dorayaki</h3>
+          <h3
+            className='add-store-dorayaki'
+            onClick={() => setDorayakiModalOpen(true)}  
+          >
+            Add Dorayaki
+          </h3>
         </div>
         <div className='black-line'>-</div>
         <DorayakiCardContainer dorayakis={dorayakis} />
@@ -55,10 +61,23 @@ const HomePage = () => {
         isOpen={isStoreModalOpen}
         ariaHideApp={false}      
       >
-        <AddStoreModal />
+        <AddStoreModal storesData={stores}/>
         <button
           className='close-store-modal'
           onClick={() => setStoreModalOpen(false)}
+        >
+          Close
+        </button>
+      </Modal>
+
+      <Modal
+        isOpen={isDorayakiModalOpen}
+        ariaHideApp={false}
+      >
+        <AddDorayakiModal dorayakisData={dorayakis} />
+        <button
+          className='close-dorayaki-modal'
+          onClick={() => setDorayakiModalOpen(false)}
         >
           Close
         </button>

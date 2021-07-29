@@ -15,9 +15,9 @@ const OwnCard = ({own}) => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/own/get-qty/${own.name}/${own.taste}`)
-      .then(function (res) {
-        setQty(res.data)
-      })
+    .then(function (res) {
+      setQty(res.data)
+    })
   }, [isStockModalOpen, isMoveModalOpen])
   
   const fetchDorayaki = (own) => {
@@ -31,7 +31,10 @@ const OwnCard = ({own}) => {
   return (
     <>
       {loading ? fetchDorayaki(own) : 
-        <div className='own-card'>
+        <div
+          className='own-card'
+          style={qty === 0 ? {display: 'none'} : {}}
+        >
           <h1 className='own-taste'>
             {capitalize(dorayaki.taste)}
           </h1>

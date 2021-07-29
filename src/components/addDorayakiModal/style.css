@@ -1,0 +1,33 @@
+.add-dorayaki-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-dorayaki-modal h1 {
+  margin-bottom: 0.5rem;
+}
+
+.add-dorayaki-modal p {
+  margin-top: 0;
+}
+
+.add-dorayaki-modal form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-dorayaki-modal label {
+  margin-bottom: 2rem;
+}
+
+.add-dorayaki-modal input {
+  margin-left: 2rem;
+  width: 50rem;
+  font-size: 1rem;
+}
+
+.add-dorayaki-modal .submit-button {
+  width: 7rem;
+  margin-left: 0;
+}
