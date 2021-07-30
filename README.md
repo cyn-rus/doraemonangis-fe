@@ -29,7 +29,7 @@ Fitur tersedia:
 * Menambah jenis dorayaki
 
 ## Endpoint
-Hanya terdapat 2 endpoint, yaitu `/` dan `/:namaToko`
+Hanya terdapat 2 endpoint, yaitu `/` dan `/store/:namaToko`
 
 ## Kontak
 Created by [@cyn-rus](https://github.com/cyn-rus)
