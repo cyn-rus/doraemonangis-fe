@@ -20,6 +20,7 @@ npm i
 ## Fitur
 Fitur tersedia:
 * Melihat toko dorayaki tersedia
+* Filter toko dorayaki berdasarkan kecamatan atau provinsi
 * Menambah toko dorayaki
 * Menghapus toko dorayaki yang ada
 * Melihat stok dorayaki dari setiap toko
