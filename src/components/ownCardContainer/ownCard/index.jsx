@@ -39,6 +39,11 @@ const OwnCard = ({own}) => {
           <h1 className='own-taste'>
             {capitalize(dorayaki.taste)}
           </h1>
+          <img
+            src={dorayaki.image}
+            alt={dorayaki.taste}
+            className='dorayaki-image'
+          />
           <h3 className='own-desc'>
             Description
           </h3>

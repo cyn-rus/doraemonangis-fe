@@ -1,0 +1,10 @@
+.store-filter {
+  display: flex;
+  justify-content: center;
+}
+
+.store-filter-bar {
+  margin-top: 1rem;
+  width: 50rem;
+  font-size: 1rem;
+}

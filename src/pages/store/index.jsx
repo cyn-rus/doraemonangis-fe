@@ -18,7 +18,7 @@ const Store = (storeName) => {
 
   useEffect(() => {
     async function fetchOwns() {
-      await axios.get(`${BACKEND_URL}/${name}`)
+      await axios.get(`${BACKEND_URL}/own/${name}`)
       .then(function (res) {
         setOwns(res.data)
       })

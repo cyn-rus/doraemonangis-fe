@@ -1,5 +1,5 @@
 import React from 'react'
-import StoreCard from './storeCard'
+import StoreCard from '../storeCard'
 import './style.css'
 
 const StoreCardContainer = ({stores}) => {

@@ -19,3 +19,9 @@
 .dorayaki-taste {
   margin-bottom: 0;
 }
+
+.dorayaki-image {
+  margin-top: 0.5rem;
+  width: 10rem;
+  height: auto;
+}

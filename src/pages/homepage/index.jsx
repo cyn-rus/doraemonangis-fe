@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import AddStoreModal from '../../components/addStoreModal'
 import AddDorayakiModal from '../../components/addDorayakiModal'
 import DorayakiCardContainer from '../../components/dorayakiCardContainer'
-import StoreCardContainer from '../../components/storeCardContainer'
+import FilterStoreCard from '../../components/filterStoreCard'
 import { BACKEND_URL } from '../../const'
 import './style.css'
 
@@ -41,7 +41,7 @@ const HomePage = () => {
           </h3>
         </div>
           <div className='black-line'>-</div>
-        <StoreCardContainer stores={stores} />
+        <FilterStoreCard storesData={stores} />
       </div>
       <div className='dorayaki'>
         <div className='title'>

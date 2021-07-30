@@ -6,6 +6,11 @@ const DorayakiCard = ({dorayaki}) => {
   return (
     <div className='dorayaki-card'>
       <h1 className='dorayaki-taste'>{capitalize(dorayaki.taste)}</h1>
+      <img
+        className='dorayaki-image'
+        alt={dorayaki.taste}
+        src={dorayaki.image}
+      />
       <h3 className='dorayaki-description'>{capitalize(dorayaki.description)}</h3>
     </div>
   )

@@ -7,7 +7,9 @@ const AddDorayakiModal = ({dorayakisData}) => {
   const [dorayakis, setDorayakis] = useState(dorayakisData)
   const [dorayakiName, setDorayakiName] = useState('')
   const [dorayakiDesc, setDorayakiDesc] = useState('')
+  const [dorayakiImg, setDorayakiImg] = useState('')
   const [dorayakiNameErr, setDorayakiNameErr] = useState(false)
+  const [dorayakiImgErr, setDorayakiImgErr] = useState(false)
   const [isSubmitted, setSubmitted] = useState(false)
 
   useEffect(() => {
@@ -19,8 +21,16 @@ const AddDorayakiModal = ({dorayakisData}) => {
 
   const checkValidation = () => {
     let valid = true
+    const types = ['jpg', 'jpeg', 'tiff', 'png', 'gif', 'bmp']
+    const url = dorayakiImg.split('.')
+    const extension = url[url.length-1]
     if (dorayakis.some(dorayaki => dorayaki.taste.toLowerCase() === dorayakiName.toLowerCase())) {
       setDorayakiNameErr(true)
+      valid = false
+    }
+
+    if (types.indexOf(extension) === -1) {
+      setDorayakiImgErr(true)
       valid = false
     }
 
@@ -39,7 +49,7 @@ const AddDorayakiModal = ({dorayakisData}) => {
         data: {
           taste: dorayakiName,
           description: dorayakiDesc,
-          image: "/"
+          image: dorayakiImg
         }
       })
 
@@ -62,7 +72,7 @@ const AddDorayakiModal = ({dorayakisData}) => {
             Fill this one in!
           </p>
           <span style={{color: 'red'}}>*</span>Dorayaki Taste:
-          <input 
+          <input
             type='text'
             name='name'
             onChange={(e) => {setDorayakiName(e.target.value); setSubmitted(false); setDorayakiNameErr(false)}}
@@ -71,12 +81,26 @@ const AddDorayakiModal = ({dorayakisData}) => {
         <label>
           <p style={/\S/.test(dorayakiDesc) ? {color: 'white'} : {color: 'red'}}>
             Fill this one in!
-          </p>
+          </p> 
           <span style={{color: 'red'}}>*</span>Dorayaki Description:
           <input
             type='text'
             name='description'
             onChange={(e) => {setDorayakiDesc(e.target.value); setSubmitted(false)}}
+          />
+        </label>
+        <label>
+          <p style={dorayakiImgErr ? {color: 'red'} : {color: 'white'}}>
+            This is not an image!
+          </p>
+          <p style={/\S/.test(dorayakiImg) ? {color: 'white'} : {color: 'red'}}>
+            Fill this one in!
+          </p>
+          <span style={{color: 'red'}}>*</span>Dorayaki Image:
+          <input
+            type='text'
+            name='image'
+            onChange={(e) => {setDorayakiImg(e.target.value); setSubmitted(false)}}
           />
         </label>
       </form>
