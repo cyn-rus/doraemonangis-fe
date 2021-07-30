@@ -5,6 +5,7 @@ import { capitalize } from '../../helper'
 import GoBackButton from '../../components/goBackButton'
 import OwnCardContainer from '../../components/ownCardContainer'
 import AddStockModal from '../../components/addStockModal'
+import { BACKEND_URL } from '../../const'
 import './style.css'
 
 const Store = (storeName) => {
@@ -15,20 +16,23 @@ const Store = (storeName) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [total, setTotal] = useState(0)
 
-  useEffect(async () => {
-    await axios.get(`http://localhost:5000/own/${name}`)
-    .then(function (res) {
-      setOwns(res.data)
-    })
-  }, [isModalOpen])
+  useEffect(() => {
+    async function fetchOwns() {
+      await axios.get(`${BACKEND_URL}/${name}`)
+      .then(function (res) {
+        setOwns(res.data)
+      })
+    }
+    fetchOwns()
+  }, [isModalOpen, name])
 
   const fetchStoreData = () => {
-    axios.get(`http://localhost:5000/store/${name}`)
+    axios.get(`${BACKEND_URL}/store/${name}`)
       .then(function (res) {
         setStore(res.data[0])
     })
 
-    axios.get('http://localhost:5000/dorayaki/count')
+    axios.get(`${BACKEND_URL}/dorayaki/count`)
     .then(function (res) {
       setTotal(res.data)
     })

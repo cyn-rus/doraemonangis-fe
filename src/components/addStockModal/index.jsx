@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { capitalize } from '../../helper'
+import { BACKEND_URL } from '../../const'
 import './style.css'
 
 const AddStockModal = ({storeName, ownsData, total}) => {
@@ -12,14 +13,16 @@ const AddStockModal = ({storeName, ownsData, total}) => {
   const [owns, setOwns] = useState(ownsData)
   const [isZero, setZero] = useState(false)
 
-  useEffect(async () => {
-    await axios.get(`http://localhost:5000/own/${storeName}`)
-    .then(function (res) {
-      setOwns(res.data)
-    })
+  useEffect(() => {
+    async function fetchStoreName() {
+      await axios.get(`${BACKEND_URL}/own/${storeName}`)
+      .then(function (res) {
+        setOwns(res.data)
+      })
+    }
 
-    if (owns.length !== total) {
-      await axios.get('http://localhost:5000/dorayaki')
+    async function fetchDorayakis() {
+      await axios.get(`${BACKEND_URL}/dorayaki`)
       .then(function (res) {
         if (owns.length !== 0) {
           let dorayakis = []
@@ -39,8 +42,14 @@ const AddStockModal = ({storeName, ownsData, total}) => {
           setDorayakis(res.data)
         }
       })
+
     }
-  }, [isSubmitted])
+
+    fetchStoreName()
+    if (owns.length !== total) {
+      fetchDorayakis()
+    }
+  }, [isSubmitted, storeName, owns, total])
 
   const handleChange = (e) => {
     setTaste(e.target.value)
@@ -69,7 +78,7 @@ const AddStockModal = ({storeName, ownsData, total}) => {
     if (qty > 0) {
       const response = await axios({
         method: 'post',
-        url: 'http://localhost:5000/own/add',
+        url: `${BACKEND_URL}/own/add`,
         data: {
           name: storeName,
           taste: taste,

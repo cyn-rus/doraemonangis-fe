@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
 import { capitalize } from '../../../helper'
+import { BACKEND_URL } from '../../../const'
 import './style.css'
 
 const StoreCard = ({store}) => {
@@ -13,7 +14,7 @@ const StoreCard = ({store}) => {
     if (toggleButton) {
       axios({
         method: 'delete',
-        url: `http://localhost:5000/store/${store.name}`
+        url: `${BACKEND_URL}/store/${store.name}`
       })
       setDeleted(true)
     }

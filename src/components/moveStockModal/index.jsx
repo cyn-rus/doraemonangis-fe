@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { capitalize } from '../../helper'
+import { BACKEND_URL } from '../../const'
 import './style.css'
 
 const MoveStockModal = ({own, qtyData}) => {
@@ -15,15 +16,18 @@ const MoveStockModal = ({own, qtyData}) => {
   const [isQtySame, setQtySame] = useState(false)
   const [isSubmitted, setSubmitted] = useState(false)
   
-  useEffect(async () => {
-    await axios.get(`http://localhost:5000/own/get-qty/${own.name}/${own.taste}`)
-    .then(function (res) {
-      setInitQty(res.data)
-    })
-  }, [isSubmitted])
+  useEffect(() => {
+    async function fetchQty() {
+      await axios.get(`${BACKEND_URL}/own/get-qty/${own.name}/${own.taste}`)
+      .then(function (res) {
+        setInitQty(res.data)
+      })
+    }
+    fetchQty()
+  }, [isSubmitted, own])
 
   const fetchStore = () => {
-    axios.get(`http://localhost:5000/store`)
+    axios.get(`${BACKEND_URL}/store`)
     .then(function (res) {
       const data = res.data.filter(function(obj) {
         return obj.name !== own.name
@@ -36,12 +40,12 @@ const MoveStockModal = ({own, qtyData}) => {
 
   useEffect(() => {
     if (toStore) {
-      axios.get(`http://localhost:5000/own/get-qty/${toStore}/${own.taste}`)
+      axios.get(`${BACKEND_URL}/own/get-qty/${toStore}/${own.taste}`)
         .then(function (res) {
           setToQty(res.data)
         })
     }
-  }, [toStore])
+  }, [toStore, own])
 
   const addToQty = () => {
     setSubmitted(false)
@@ -93,7 +97,7 @@ const MoveStockModal = ({own, qtyData}) => {
     else {
       const response = axios({
         method: 'post',
-        url: 'http://localhost:5000/own/move',
+        url: `${BACKEND_URL}/own/move`,
         data: data
       })
 

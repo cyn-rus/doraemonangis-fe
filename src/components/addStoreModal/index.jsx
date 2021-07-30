@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { BACKEND_URL } from '../../const'
 import './style.css'
 
 const AddStoreModal = ({storesData}) => {
@@ -13,14 +14,13 @@ const AddStoreModal = ({storesData}) => {
   const [isSubmitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/store')
+    axios.get(`${BACKEND_URL}/store`)
       .then(function (res) {
         setStores(res.data)
       })
   }, [isSubmitted])
 
   const onChangeStoreName = (e) => {
-    console.log("fdsjhahfjkashfjkhasjkhkj")
     setStoreName(e.target.value)
     setSubmitted(false)
     setStoreNameErr(false)
@@ -59,7 +59,7 @@ const AddStoreModal = ({storesData}) => {
     if (valid) {
       const response = axios({
         method: 'post',
-        url: 'http://localhost:5000/store/add',
+        url: `${BACKEND_URL}/store/add`,
         data: {
           name: storeName,
           address: storeAddress,

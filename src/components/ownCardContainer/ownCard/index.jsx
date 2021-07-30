@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import ChangeStockModal from '../../changeStockModal'
 import MoveStockModal from '../../moveStockModal'
 import { capitalize, capitalizeFirst } from '../../../helper'
+import { BACKEND_URL } from '../../../const'
 import './style.css'
 
 const OwnCard = ({own}) => {
@@ -14,14 +15,14 @@ const OwnCard = ({own}) => {
   const [isMoveModalOpen, setMoveModalOpen] = useState(false) 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/own/get-qty/${own.name}/${own.taste}`)
+    axios.get(`${BACKEND_URL}/own/get-qty/${own.name}/${own.taste}`)
     .then(function (res) {
       setQty(res.data)
     })
-  }, [isStockModalOpen, isMoveModalOpen])
+  }, [isStockModalOpen, isMoveModalOpen, own])
   
   const fetchDorayaki = (own) => {
-    axios.get(`http://localhost:5000/dorayaki/${own.taste}`)
+    axios.get(`${BACKEND_URL}/dorayaki/${own.taste}`)
       .then(function (res) {
         setDorayaki(res.data[0])
         setLoading(false)

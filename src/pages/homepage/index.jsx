@@ -15,14 +15,14 @@ const HomePage = () => {
   const [isDorayakiModalOpen, setDorayakiModalOpen] = useState(false)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/store')
+    axios.get(`${BACKEND_URL}/store`)
       .then(function (res) {
         setStores(res.data)
     })
   }, [isStoreModalOpen])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/dorayaki')
+    axios.get(`${BACKEND_URL}/dorayaki`)
       .then(function (res) {
         setDorayakis(res.data)
     })

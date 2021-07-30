@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { capitalize } from '../../helper'
+import { BACKEND_URL } from '../../const'
 import './style.css'
 
 const ChangeStockModal = ({own, qtyData}) => {
@@ -10,12 +11,15 @@ const ChangeStockModal = ({own, qtyData}) => {
   const [isQtySame, setQtySame] = useState(false)
   const [isSubmitted, setSubmitted] = useState(false)
 
-  useEffect(async () => {
-    await axios.get(`http://localhost:5000/own/get-qty/${own.name}/${own.taste}`)
-    .then(function (res) {
-      setInitQty(res.data)
-    })
-  }, [isSubmitted])
+  useEffect(() => {
+    async function fetchQty() {
+      await axios.get(`${BACKEND_URL}/own/get-qty/${own.name}/${own.taste}`)
+      .then(function (res) {
+        setInitQty(res.data)
+      })
+    }
+    fetchQty()
+  }, [isSubmitted, own])
 
   const reduceQty = () => {
     setQtySame(false)
@@ -51,20 +55,20 @@ const ChangeStockModal = ({own, qtyData}) => {
       if (qty === 0) {
         response = axios({
           method: 'delete',
-          url: `http://localhost:5000/own/${data.name}/${data.taste}`
+          url: `${BACKEND_URL}/own/${data.name}/${data.taste}`,
         })
       }
       else if (qtyData > qty) {
         response = axios({
           method: 'post',
-          url: 'http://localhost:5000/own/add',
+          url: `${BACKEND_URL}/own/add`,
           data: data
         })
       }
       else {
         response = axios({
           method: 'post',
-          url: 'http://localhost:5000/own/substract',
+          url: `${BACKEND_URL}/own/substract`,
           data: data
         })
       }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { BACKEND_URL } from '../../const'
 import './style.css'
 
 const AddDorayakiModal = ({dorayakisData}) => {
@@ -10,7 +11,7 @@ const AddDorayakiModal = ({dorayakisData}) => {
   const [isSubmitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/dorayaki')
+    axios.get(`${BACKEND_URL}/dorayaki`)
       .then(function (res) {
         setDorayakis(res.data)
       })
@@ -34,7 +35,7 @@ const AddDorayakiModal = ({dorayakisData}) => {
     if (!dorayakiNameErr && bool) {
       const response = axios({
         method: 'post',
-        url: 'http://localhost:5000/dorayaki/add',
+        url:`${BACKEND_URL}/dorayaki/add`,
         data: {
           taste: dorayakiName,
           description: dorayakiDesc,
