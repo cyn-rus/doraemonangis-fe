@@ -1,5 +1,5 @@
 import React from 'react'
-import { capitalize } from '../../../helper'
+import { capitalize, capitalizeFirst } from '../../../helper'
 import './style.css'
 
 const DorayakiCard = ({dorayaki}) => {
@@ -11,7 +11,7 @@ const DorayakiCard = ({dorayaki}) => {
         alt={dorayaki.taste}
         src={dorayaki.image}
       />
-      <h3 className='dorayaki-description'>{capitalize(dorayaki.description)}</h3>
+      <h3 className='dorayaki-description'>{capitalizeFirst(dorayaki.description)}</h3>
     </div>
   )
 }

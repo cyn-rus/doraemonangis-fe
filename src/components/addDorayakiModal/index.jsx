@@ -56,6 +56,7 @@ const AddDorayakiModal = ({dorayakisData}) => {
       if (response) {
         setDorayakiNameErr(false)
         setSubmitted(true)
+        setDorayakiImgErr(false)
       }
     }
   }
@@ -100,7 +101,7 @@ const AddDorayakiModal = ({dorayakisData}) => {
           <input
             type='text'
             name='image'
-            onChange={(e) => {setDorayakiImg(e.target.value); setSubmitted(false)}}
+            onChange={(e) => {setDorayakiImg(e.target.value); setSubmitted(false); setDorayakiImgErr(false)}}
           />
         </label>
       </form>
